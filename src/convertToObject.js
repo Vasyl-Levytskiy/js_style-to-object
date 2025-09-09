@@ -8,8 +8,7 @@
 function convertToObject(sourceString) {
   return sourceString
     .split(';')
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0)
+    .filter((line) => line.trim().length > 0)
     .reduce((parsedStyles, line) => {
       const colonIndex = line.indexOf(':');
 
@@ -24,9 +23,7 @@ function convertToObject(sourceString) {
         return parsedStyles;
       }
 
-      parsedStyles[rawKey] = rawValue;
-
-      return parsedStyles;
+      return { ...parsedStyles, [rawKey]: rawValue };
     }, {});
 }
 
